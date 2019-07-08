@@ -16,9 +16,24 @@ namespace DiceRoller
         private bool isHeld;
         private byte numbersOfSides;
 
+        /// <summary>
+        /// rolls die and sets face value to generated number
+        /// and returns generated number
+        /// </summary>
+        /// <returns></returns>
         public byte Roll()
         {
-            throw new NotImplementedException();
+            const byte MinValue = 1;
+
+            //offset because of exclusive upper bound for random
+            byte Maxvalue = (byte)(numbersOfSides + 1);
+
+            Random rand = new Random();
+            byte result = (byte)rand.Next(1, numbersOfSides + 1);
+
+            faceValue = result;
+
+            return result;
         }
     }
 }
