@@ -14,9 +14,10 @@ namespace DiceRoller
             Dice die2 = new Dice();
             Dice die3 = new Dice();
 
-            Console.WriteLine(die1);
-            Console.WriteLine(die2);
-            Console.WriteLine(die3);
+            Console.WriteLine(die1.FaceValue);
+            Console.WriteLine(die2.FaceValue);
+            Console.WriteLine(die3.FaceValue);
+            Console.ReadKey();
         }
     }
 }
