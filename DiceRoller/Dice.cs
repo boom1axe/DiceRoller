@@ -15,6 +15,41 @@ namespace DiceRoller
         private byte faceValue;
         private bool isHeld;
         private byte numbersOfSides;
+        private static Random rand;
+
+        static Dice()
+        {
+            // Static allows sharing on instance of Random across
+            // instances of 
+            rand = new Random();
+        }
+
+        /// <summary>
+        /// Creates a standard 6-sided die
+        /// </summary>
+        public Dice() : this(6)
+        {
+
+        }
+
+        public Dice(byte numberOfSides)
+        {
+            this.numbersOfSides = numbersOfSides;
+            Roll();
+        }
+
+        public byte FaceValue
+        {
+            get { return faceValue; }
+            private set
+            {
+                if (value == 0)
+                    throw new Exception("Dice cannot be 0");
+                FaceValue = value;
+            }
+        }
+
+        public bool IsHeld { get; set; }
 
         /// <summary>
         /// rolls die and sets face value to generated number
@@ -23,17 +58,25 @@ namespace DiceRoller
         /// <returns></returns>
         public byte Roll()
         {
+
+            if (isHeld)
+            {
+                return FaceValue;
+            }
+
             const byte MinValue = 1;
 
             //offset because of exclusive upper bound for random
-            byte Maxvalue = (byte)(numbersOfSides + 1);
+            byte MaxValue = (byte)(numbersOfSides + 1);
 
             Random rand = new Random();
-            byte result = (byte)rand.Next(1, numbersOfSides + 1);
+            byte result = (byte)rand.Next(MinValue, MaxValue);
 
             faceValue = result;
 
             return result;
         }
+
+
     }
 }
